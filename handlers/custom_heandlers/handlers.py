@@ -106,6 +106,12 @@ async def stopping_notifications(message: Message):
 
 @router.message(F.text.lower() == "получить информацию из бд")
 async def get_products(message: Message, session: AsyncSession):
+    """
+    Функция для получения 5 записей из БД
+    :param message: объект Message
+    :param session: объект Session
+    :return: None
+    """
     query = select(Product).order_by(desc(Product.created_at)).limit(5)
     result = await session.execute(query)
     products = result.scalars()
