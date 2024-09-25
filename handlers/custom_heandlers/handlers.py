@@ -1,5 +1,3 @@
-import logging
-
 import sqlalchemy.exc
 from aiogram.types import Message, CallbackQuery
 from aiogram import F, Router
@@ -21,6 +19,7 @@ ARTICLES = []
 @router.message(
     F.text.lower() == "получить информацию по товару")
 async def get_article_product(message: Message, state: FSMContext):
+    # Это функция для получения артиклей продуктов
     await message.reply("Хорошо, введите артикул товара")
     await state.set_state(ProductInfo.get_article)
 
