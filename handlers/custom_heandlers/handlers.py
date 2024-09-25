@@ -26,7 +26,13 @@ async def get_article_product(message: Message, state: FSMContext):
 
 @router.message(ProductInfo.get_article)
 async def get_info_product(message: Message, state: FSMContext, session: AsyncSession):
-    # await state.update_data(chosen_food=message.text.lower()) \ get_data()
+    """
+    Функция для получения информации о продукте
+    :param message: объект Message
+    :param state: состояние
+    :param session: сессия
+    :return: None
+    """
     try:
         article = int(message.text)
     except ValueError:
