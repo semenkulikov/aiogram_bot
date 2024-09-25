@@ -79,6 +79,12 @@ async def get_info_product(message: Message, state: FSMContext, session: AsyncSe
 
 @router.callback_query(F.data.startswith("subscribe_"))
 async def send_random_value(callback: CallbackQuery, session: AsyncSession):
+    """
+    Функция для установки рандомного значения
+    :param callback: объект Collback
+    :param session: объект сессии
+    :return: None
+    """
     product_article = callback.data.split("_")[1]
     query = select(Product).where(Product.article == product_article)
     result = await session.execute(query)
