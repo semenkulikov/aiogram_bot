@@ -38,6 +38,8 @@ async def get_info_product(message: Message, state: FSMContext, session: AsyncSe
     except ValueError:
         await message.answer("Введите корректный артикул!")
         return
+
+    # URL для получения информации о карточках товаров.
     path = f"https://card.wb.ru/cards/v1/detail?appType=1&curr=rub&dest=-1257786&spp=30&nm={article}"
     async with ClientSession() as http_session:
         async with http_session.get(path) as response:
@@ -45,9 +47,12 @@ async def get_info_product(message: Message, state: FSMContext, session: AsyncSe
     try:
         product_data: dict = data.get("data").get("products")[0]
     except IndexError:
+        # Обработка ошибок
         await message.answer("Товар с таким артикулом не найден")
         await state.set_state(None)
         return
+
+    # Парсинг информации
     name = product_data.get("name")
     price = product_data.get("salePriceU") // 100
     rating = product_data.get("reviewRating")
@@ -67,6 +72,7 @@ async def get_info_product(message: Message, state: FSMContext, session: AsyncSe
     except sqlalchemy.exc.IntegrityError:
         pass
 
+    # Формирование итогового отчета
     result_text = (f"Вот информация по товару с артикулом {article}:\n"
                    f"Название: {name}\n"
                    f"Артикул: {article}\n"
