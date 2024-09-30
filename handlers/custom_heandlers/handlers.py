@@ -105,6 +105,11 @@ async def send_random_value(callback: CallbackQuery, session: AsyncSession):
 
 @router.message(F.text.lower() == "остановить уведомления")
 async def stopping_notifications(message: Message):
+    """
+    Функция-обработчик кнопки
+    :param message: объект Message
+    :return: None
+    """
     for job in scheduler.get_jobs():
         job.remove()
     await message.reply("Получение уведомлений прекращено!")
