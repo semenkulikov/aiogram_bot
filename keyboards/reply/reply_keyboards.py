@@ -3,6 +3,10 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
 
 def get_menu() -> ReplyKeyboardMarkup:
+    """
+    Функция для рендеринга reply кнопок
+    :return: набор reply кнопок
+    """
     kb = ReplyKeyboardBuilder()
     kb.button(text="Получить информацию по товару")
     kb.button(text="Остановить уведомления")
