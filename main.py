@@ -32,6 +32,7 @@ async def main() -> None:
     dp.shutdown.register(on_shutdown)
     dp.update.middleware(DataBaseSession(session_pool=session_maker))
     scheduler.start()
+
     await bot.delete_webhook(drop_pending_updates=True)
     await bot.set_my_commands(commands=DEFAULT_COMMANDS, scope=types.BotCommandScopeAllPrivateChats())
     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
