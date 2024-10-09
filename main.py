@@ -19,7 +19,7 @@ async def on_startup(bot):
 
 
 async def on_shutdown(bot):
-    print('Бот прекратил работу!')
+    print('Бот успешно прекратил работу!')
 
 
 async def main() -> None:
