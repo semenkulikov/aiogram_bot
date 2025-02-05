@@ -2,8 +2,6 @@ from config_data.config import DEFAULT_COMMANDS
 from aiogram import types
 from loader import bot, dp, scheduler
 import asyncio
-import logging
-import sys
 import handlers
 from database.engine import create_db, session_maker
 from middlewares.db import DataBaseSession
@@ -38,7 +36,4 @@ async def main() -> None:
     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
 
 if __name__ == '__main__':
-
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout,
-                        format="%(asctime)s - %(levelname)s - %(name)s - %(message)s")
     asyncio.run(main())
