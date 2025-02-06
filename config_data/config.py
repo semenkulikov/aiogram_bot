@@ -23,6 +23,6 @@ USERNAME = os.getenv('USER_NAME')
 PASSWORD = os.getenv('PASSWORD')
 DB_NAME = os.getenv('DB_NAME')
 
-DATABASE_URL = f"postgresql+asyncpg://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}"
+# DATABASE_URL = f"postgresql+asyncpg://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}"
 
-# DATABASE_URL = "sqlite+aiosqlite:///my_base.db"
+DATABASE_URL = f"sqlite+aiosqlite:///{BASE_DIR}/database/database.db"

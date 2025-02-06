@@ -3,7 +3,7 @@ from config_data.config import DATABASE_URL
 from database.models import Base
 
 
-engine = create_async_engine(DATABASE_URL, echo=True)
+engine = create_async_engine(DATABASE_URL)
 session_maker = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
 
 
