@@ -7,9 +7,10 @@ from database.models import Product
 from sqlalchemy.ext.asyncio import AsyncSession
 from aiohttp import ClientSession
 from keyboards.inline.inline_keyboards import get_inline_subscribe
-from loader import scheduler
+from loader import scheduler, app_logger
 from sqlalchemy import select, desc
 from utils.funcs import get_text_for_product
+
 
 
 router = Router()
@@ -22,6 +23,7 @@ async def get_article_product(message: Message, state: FSMContext):
     # Это функция для получения артиклей продуктов
     await message.reply("Хорошо, введите артикул товара")
     await state.set_state(ProductInfo.get_article)
+    app_logger.info(f"Пользователь {message.from_user.full_name} запросил информацию по товару")
 
 
 @router.message(ProductInfo.get_article)
@@ -79,6 +81,7 @@ async def get_info_product(message: Message, state: FSMContext, session: AsyncSe
                    f"Цена: {price}\n"
                    f"Рейтинг товара: {rating}\n"
                    f"Количество товара на всех складах: {count}")
+    app_logger.info(f"Пользователю {message.from_user.full_name} была выдана информация по товару {name}")
     await message.answer(result_text, reply_markup=get_inline_subscribe(article))
     await state.set_state(None)
 
