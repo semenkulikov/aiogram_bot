@@ -100,6 +100,7 @@ async def send_random_value(callback: CallbackQuery, session: AsyncSession):
     product = result.scalar()
     result_text = get_text_for_product(product)
     scheduler.add_job(callback.bot.send_message, "interval", minutes=5, args=(callback.from_user.id, result_text))
+    app_logger.info(f"Пользователь {callback.from_user.full_name} подписался на уведомления")
     await callback.answer(
         "Вы подписались на уведомления!",
         show_alert=True
@@ -115,6 +116,7 @@ async def stopping_notifications(message: Message):
     """
     for job in scheduler.get_jobs():
         job.remove()
+    app_logger.info(f"Пользователь {message.from_user.full_name} отписался от уведомлений")
     await message.reply("Получение уведомлений прекращено!")
 
 
