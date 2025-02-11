@@ -131,6 +131,7 @@ async def get_products(message: Message, session: AsyncSession):
     query = select(Product).order_by(desc(Product.created_at)).limit(5)
     result = await session.execute(query)
     products = result.scalars()
+    app_logger.info(f"Пользователь {message.from_user.full_name} запросил последние 5 записей из БД")
     await message.reply("Вот последние 5 записей из БД:")
     for product in products:
         await message.answer(get_text_for_product(product))
