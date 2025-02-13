@@ -7,6 +7,7 @@ Base = declarative_base()
 
 
 class Product(Base):
+    """ Модель продукта """
     __tablename__ = 'products'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
